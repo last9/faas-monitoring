@@ -29,4 +29,4 @@ Before you begin, ensure you have met the following requirements:
     docker-compose up -d  
     ```
 4. Visit your grafana dashboard to view your metrics
-   ![Function as a service Monitoring](/Users/developer/workspace/faas-monitoring/assets/img/explore.png "FaaS Monitoring")
+   ![Function as a service Monitoring](./assets/img/explore.png "FaaS Monitoring")
