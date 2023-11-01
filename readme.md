@@ -23,7 +23,7 @@ Before you begin, ensure you have met the following requirements:
    git clone https://github.com/last9/faas-monitoring
    cd faas-monitoring
    ```
-2. Add your [Levitate](https://last9.io/levitate-tsdb/) remote write URL [here](./docker-compose.yaml:40)
+2. Add your [Levitate](https://last9.io/levitate-tsdb/) remote write URL [here](https://github.com/last9/faas-monitoring/blob/c7d7ffb43bb19aeb90a0490136176bd1849439ed/docker-compose.yaml#L40)
 3. Run the Docker Compose setup:
     ```bash
     docker-compose up -d  
