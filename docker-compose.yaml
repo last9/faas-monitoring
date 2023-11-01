@@ -1,0 +1,44 @@
+---
+version: "3"
+
+networks:
+  faas-net:
+
+services:
+  auto-debit-function:
+    container_name: "auto-debit-function"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - faas-net
+    restart: always
+
+  prometheus-pushgateway:
+    container_name: "prometheus-pushgateway"
+    image: prom/pushgateway
+    depends_on:
+      - auto-debit-function
+    ports:
+      - "9091:9091"
+    networks:
+      - faas-net
+    restart: on-failure
+
+  vmagent:
+    container_name: vmagent
+    image: victoriametrics/vmagent
+    depends_on:
+      - prometheus-pushgateway
+    ports:
+      - "8429:8429"
+    volumes:
+      - ./vmagentdata:/vmagentdata
+      - ./prometheus/vmagent.yaml:/etc/vmagent/vmagent.yaml
+    command:
+      - "--promscrape.config=/etc/vmagent/vmagent.yaml"
+      - "--remoteWrite.url=<remote-write-url>"
+    networks:
+      - faas-net
+    restart: always
+
